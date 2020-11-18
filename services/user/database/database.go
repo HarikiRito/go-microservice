@@ -24,7 +24,7 @@ func connectDatabase() {
 	db = conn
 }
 
-func GetInstance() *gorm.DB {
+func GetDBInstance() *gorm.DB {
 	if db == nil {
 		lock.Lock()
 		// Lock so only one goroutine at a time can access
