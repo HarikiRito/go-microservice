@@ -2,18 +2,18 @@ package repositories
 
 import "user/models"
 
-type User = models.User
+type UserEntity = models.UserEntity
 type UserRepository struct {
 }
 
-func (r *UserRepository) GetAll() []User {
-	var records []User
-	GetCommonRepo().GetAll(&records)
+func (r *UserRepository) GetAll() []UserEntity {
+	var records []UserEntity
+	NewCommonRepo().GetAll(&records)
 	return records
 }
 
-func (r *UserRepository) FindById(id uint) User {
-	var record User
-	GetCommonRepo().FindById(&record, id)
+func (r *UserRepository) FindById(id uint) UserEntity {
+	var record UserEntity
+	NewCommonRepo().FindById(&record, id)
 	return record
 }

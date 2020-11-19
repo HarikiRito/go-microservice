@@ -2,7 +2,6 @@ package repositories
 
 import (
 	"gorm.io/gorm"
-	"sync"
 	"user/database"
 )
 
@@ -30,16 +29,8 @@ func (r *CommonRepository) DeleteById(model interface{}, id uint) {
 	r.Db.Delete(model, id)
 }
 
-var lock = &sync.Mutex{}
-var commonRepository *CommonRepository
-
-func GetCommonRepo() *CommonRepository {
-	if commonRepository == nil {
-		lock.Lock()
-		defer lock.Unlock()
-		commonRepository = &CommonRepository{
-			Db: database.GetDBInstance(),
-		}
+func NewCommonRepo() *CommonRepository {
+	return &CommonRepository{
+		Db: database.GetDBInstance(),
 	}
-	return commonRepository
 }

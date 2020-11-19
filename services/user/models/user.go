@@ -4,8 +4,13 @@ import (
 	"gorm.io/gorm"
 )
 
-type User struct {
+type UserEntity struct {
 	gorm.Model
-	Name string
-	Age  uint
+	Name     string
+	Age      uint
+	Password string
+}
+
+func (UserEntity) TableName() string {
+	return "users"
 }
