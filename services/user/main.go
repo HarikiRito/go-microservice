@@ -1,13 +1,8 @@
 package main
 
 import (
-	"fmt"
-	"github.com/davecgh/go-spew/spew"
-	"github.com/gin-gonic/gin"
-	"golang.org/x/crypto/bcrypt"
-	"net/http"
 	"user/database"
-	"user/repositories"
+	"user/rpc"
 )
 
 func main() {
@@ -20,18 +15,9 @@ func main() {
 	//tokenString, _ := jwtService.GenerateToken(jwt.MapClaims{
 	//	"userId": 648,
 	//})
+	//user := models.UserEntity{Name: "main", Age: 12, Password: "zzz"}
+	//r := repositories.UserRepository{}
+	//r.Create(user)
 
-	hash, _ := bcrypt.GenerateFromPassword([]byte("password"), bcrypt.DefaultCost)
-
-	fmt.Println(string(hash))
-	userRepo := repositories.UserRepository{}
-	users := userRepo.GetAll()
-	r := gin.Default()
-	r.GET("/users", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"ok": users,
-		})
-		spew.Dump(users)
-	})
-	r.Run()
+	rpc.RunRPCServer()
 }
