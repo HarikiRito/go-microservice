@@ -12,8 +12,7 @@ func main() {
 	r := gin.Default()
 
 	conn := GrpcDialConnection("localhost:50051")
-	//defer conn.Close()
-	//defer cancel()
+	defer conn.Close()
 	client := pb.NewGreeterClient(conn)
 
 	r.GET("/users", func(c *gin.Context) {
